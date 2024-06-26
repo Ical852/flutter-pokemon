@@ -1,9 +1,11 @@
+import 'package:flutterpokemon/functions/global_func.dart';
+
 class SpeciesModel {
-  late String name, url;
+  late String? name, url;
 
   SpeciesModel.fromJson(Map<String, dynamic> json) {
-    this.name = json['name'];
-    this.url = json['url'];
+    this.name = nullChecker(json['name'], json['name']);
+    this.url = nullChecker(json['url'], json['url']);
   }
 
   Map<String, dynamic> toJson() {

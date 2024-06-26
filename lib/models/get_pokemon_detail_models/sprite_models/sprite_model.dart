@@ -1,3 +1,4 @@
+import 'package:flutterpokemon/functions/global_func.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/sprite_models/other_models/other_model.dart';
 
 class SpriteModel {
@@ -9,18 +10,18 @@ class SpriteModel {
       frontFemale,
       frontShiny,
       frontShinyFemale;
-  late OtherModel other;
+  late OtherModel? other;
 
   SpriteModel.fromJson(Map<String, dynamic> json) {
-    this.backDefault = json['back_default'];
-    this.backFemale = json['back_female'];
-    this.backShiny = json['back_shiny'];
-    this.backShinyFemale = json['back_shiny_female'];
-    this.frontDefault = json['front_default'];
-    this.frontFemale = json['front_female'];
-    this.frontShiny = json['front_shiny'];
-    this.frontShinyFemale = json['front_shiny_female'];
-    this.other = OtherModel.fromJson(json['other']);
+    this.backDefault = nullChecker(json['back_default'], json['back_default']);
+    this.backFemale = nullChecker(json['back_female'], json['back_female']);
+    this.backShiny = nullChecker(json['back_shiny'], json['back_shiny']);
+    this.backShinyFemale = nullChecker(json['back_shiny_female'], json['back_shiny_female']);
+    this.frontDefault = nullChecker(json['front_default'], json['front_default']);
+    this.frontFemale = nullChecker(json['front_female'], json['front_female']);
+    this.frontShiny = nullChecker(json['front_shiny'], json['front_shiny']);
+    this.frontShinyFemale = nullChecker(json['front_shiny_female'], json['front_shiny_female']);
+    this.other = nullChecker(json['other'], OtherModel.fromJson(json['other']));
   }
 
   Map<String, dynamic> toJson() {
@@ -33,7 +34,7 @@ class SpriteModel {
       "front_female": this.frontFemale,
       "front_shiny": this.frontShiny,
       "front_shiny_female": this.frontShinyFemale,
-      "other": this.other.toJson()
+      "other": this.other?.toJson()
     };
   }
 }

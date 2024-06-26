@@ -1,3 +1,5 @@
+import 'package:flutterpokemon/functions/global_func.dart';
+
 class HomeModel {
   late String? 
       frontDefault,
@@ -6,10 +8,10 @@ class HomeModel {
       frontShinyFemale;
 
   HomeModel.fromJson(Map<String, dynamic> json) {
-    this.frontDefault = json['front_default'];
-    this.frontFemale = json['front_female'];
-    this.frontShiny = json['front_shiny'];
-    this.frontShinyFemale = json['front_shiny_female'];
+    this.frontDefault = nullChecker(json['front_default'], json['front_default']);
+    this.frontFemale = nullChecker(json['front_female'], json['front_female']);
+    this.frontShiny = nullChecker(json['front_shiny'], json['front_shiny']);
+    this.frontShinyFemale = nullChecker(json['front_shiny_female'], json['front_shiny_female']);
   }
 
   Map<String, dynamic> toJson() {

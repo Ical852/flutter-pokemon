@@ -1,15 +1,17 @@
+import 'package:flutterpokemon/functions/global_func.dart';
+
 class ShowdownModel {
   late String? backDefault, backFemale, backShiny, backShinyFemale, frontDefault, frontFemale,frontShiny,frontShinyFemale;
 
   ShowdownModel.fromJson(Map<String, dynamic> json) {
-    this.backDefault = json['back_default'];
-    this.backFemale = json['back_female'];
-    this.backShiny = json['back_shiny'];
-    this.backShinyFemale = json['back_shiny_female'];
-    this.frontDefault = json['front_default'];
-    this.frontFemale = json['front_female'];
-    this.frontShiny = json['front_shiny'];
-    this.frontShinyFemale = json['front_shiny_female'];
+    this.backDefault = nullChecker(json['back_default'], json['back_default']);
+    this.backFemale = nullChecker(json['back_female'], json['back_female']);
+    this.backShiny = nullChecker(json['back_shiny'], json['back_shiny']);
+    this.backShinyFemale = nullChecker(json['back_shiny_female'], json['back_shiny_female']);
+    this.frontDefault = nullChecker(json['front_default'], json['front_default']);
+    this.frontFemale = nullChecker(json['front_female'], json['front_female']);
+    this.frontShiny = nullChecker(json['front_shiny'], json['front_shiny']);
+    this.frontShinyFemale = nullChecker(json['front_shiny_female'], json['front_shiny_female']);
   }
 
   Map<String, dynamic> toJson() {

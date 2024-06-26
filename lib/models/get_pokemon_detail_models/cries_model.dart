@@ -1,9 +1,11 @@
+import 'package:flutterpokemon/functions/global_func.dart';
+
 class CriesModel {
-  late String latest, legacy;
+  late String? latest, legacy;
 
   CriesModel.fromJson(Map<String, dynamic> json) {
-    this.latest = json['latest'];
-    this.legacy = json['legacy'];
+    this.latest = nullChecker(json['latest'], json['latest']);
+    this.legacy = nullChecker(json['legacy'], json['legacy']);
   }
 
   Map<String, dynamic> toJson() {
