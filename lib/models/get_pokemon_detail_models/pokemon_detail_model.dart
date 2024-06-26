@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutterpokemon/functions/global_func.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/abilities_models/ability_model.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/cries_model.dart';
@@ -7,6 +8,7 @@ import 'package:flutterpokemon/models/get_pokemon_detail_models/species_model.da
 import 'package:flutterpokemon/models/get_pokemon_detail_models/sprite_models/sprite_model.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/stats_model.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/type_model.dart';
+import 'package:flutterpokemon/shared/constants.dart';
 
 class PokemonDetailModel {
   late int? id, height, order, baseExperience;
@@ -20,6 +22,7 @@ class PokemonDetailModel {
   late List<MoveModel>? moves;
   late List<StatsModel>? stats;
   late List<TypeModel>? types;
+  late Color? bgColor;
 
   PokemonDetailModel.fromJson(Map<String, dynamic> json) {
     this.id = nullChecker(json['id']);
@@ -51,6 +54,8 @@ class PokemonDetailModel {
     this.types = isNotNull(json['types'], ) ? json['types']
             .map<TypeModel>((result) => TypeModel.fromJson(result))
             .toList() : null;
+
+    this.bgColor = getPokeColor(types![0].type!.name!);
   }
 
   Map<String, dynamic> toJson() {

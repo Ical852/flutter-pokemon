@@ -25,7 +25,7 @@ class GetPokemonCubit extends Cubit<GetPokemonState> {
     PokemonModel? currentPokemon;
     if (state is GetPokemonSuccess) {
       currentPokemon = state.pokemon;
-      emit(GetPokemonExtendsLoading());
+      emit(GetPokemonExtendsLoading(currentPokemon));
       PokemonModel? pokemon = await PokemonServices().getAllPokemon(actionUrl: currentPokemon.next);
       if (pokemon != null) {
         currentPokemon.updateValues(pokemon);

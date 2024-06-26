@@ -11,7 +11,14 @@ final class GetPokemonInitial extends GetPokemonState {}
 
 final class GetPokemonLoading extends GetPokemonState {}
 
-final class GetPokemonExtendsLoading extends GetPokemonState {}
+final class GetPokemonExtendsLoading extends GetPokemonState {
+  final PokemonModel pokemon;
+
+  GetPokemonExtendsLoading(this.pokemon);
+
+  @override
+  List<Object> get props => [pokemon];
+}
 
 final class GetPokemonSuccess extends GetPokemonState {
   final PokemonModel pokemon;

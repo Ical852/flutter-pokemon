@@ -29,10 +29,10 @@ class PokemonServices {
           if (results[i].url != null) {
             var getDetail = await getDetailPokemon(getUrl: results[i].url!);
             if (getDetail != null) {
+              results[i].setPokemonDetail(getDetail);
               if (getDetail.id != null) {
                 var getColor = await getPokemonColor(id: getDetail.id!);
                 if (getColor != null) {
-                  results[i].setPokemonDetail(getDetail);
                   results[i].setPokemonColor(getColor);
                 }
               }

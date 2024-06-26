@@ -4,8 +4,8 @@ import 'package:flutterpokemon/models/get_pokemon_detail_models/pokemon_detail_m
 
 class PokemonResultModel {
   late String? name, url;
-  late PokemonDetailModel detail;
-  late PokemonColorModel color;
+  late PokemonDetailModel? detail = null;
+  late PokemonColorModel? color = null;
 
   PokemonResultModel.fromJson(Map<String, dynamic> json) {
     this.name = nullChecker(json['name']);
@@ -21,6 +21,6 @@ class PokemonResultModel {
   }
 
   Map<String, dynamic> toJson() {
-    return {"name": this.name, "url": this.url, "detail": this.detail.toJson(), "color": this.color.toJson()};
+    return {"name": this.name, "url": this.url, "detail": this.detail?.toJson(), "color": this.color?.toJson()};
   }
 }

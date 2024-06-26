@@ -21,14 +21,10 @@ class TypeModel {
 
 class TypeDetailModel {
   late String? name, url;
-  late Color? bgColor;
 
   TypeDetailModel.fromJson(Map<String, dynamic> json) {
     this.name = nullChecker(json['name']);
     this.url = nullChecker(json['url']);
-    if (nullChecker(json['name']) != null) {
-      this.bgColor = getPokeColor(json['name']);
-    }
   }
 
   Map<String,dynamic> toJson(){
