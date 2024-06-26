@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
         routes: {
           "/": (context) => SplashPage(),
           "/main": (context) => HomePage(),
-          "/detail": (context) => DetailPage()
         },
         initialRoute: "/",
         onGenerateRoute: (settings) {

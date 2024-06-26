@@ -10,12 +10,15 @@ class LoadMoreButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: 24
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: infoColor
       ),
-      width: 200,
-      height: 50,
+      width: double.infinity,
+      height: 45,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
@@ -24,7 +27,7 @@ class LoadMoreButton extends StatelessWidget {
         onPressed: this.onPress,
         child: Text(
           "Load More",
-          style: base.white.semiBold
+          style: medium.white.semiBold
         ),
       ),
     );

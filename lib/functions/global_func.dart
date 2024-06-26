@@ -44,3 +44,8 @@ double getWH(BuildContext context, String type) {
   if (type == 'width') return size.width;
   return size.height;
 }
+
+String capitalize(String text) {
+  if (text.isEmpty) return text;
+  return text[0].toUpperCase() + text.substring(1); 
+}

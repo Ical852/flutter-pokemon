@@ -20,20 +20,15 @@ class GetPokemonCubit extends Cubit<GetPokemonState> {
     }
   }
 
-  void extend(BuildContext context) async {
-    var state = context.read<GetPokemonCubit>().state;
-    PokemonModel? currentPokemon;
-    if (state is GetPokemonSuccess) {
-      currentPokemon = state.pokemon;
-      emit(GetPokemonExtendsLoading(currentPokemon));
-      PokemonModel? pokemon = await PokemonServices().getAllPokemon(actionUrl: currentPokemon.next);
-      if (pokemon != null) {
-        currentPokemon.updateValues(pokemon);
-        emit(GetPokemonSuccess(currentPokemon));
-      }
-      if (pokemon == null) {
-        emit(GetPokemonFailed("Failed to extends pokemon data"));
-      }
+  void extend(BuildContext context, PokemonModel currentPokemon) async {
+    emit(GetPokemonExtendsLoading(currentPokemon));
+    PokemonModel? pokemon = await PokemonServices().getAllPokemon(actionUrl: currentPokemon.next);
+    if (pokemon != null) {
+      currentPokemon.updateValues(pokemon);
+      emit(GetPokemonSuccess(currentPokemon));
+    }
+    if (pokemon == null) {
+      emit(GetPokemonFailed("Failed to extends pokemon data"));
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterpokemon/blocs/cubits/get_pokemon_cubit.dart';
+import 'package:flutterpokemon/models/get_all_pokemon_models/pokemon_model.dart';
 
 class HomeViewModel {
   late BuildContext context;
@@ -13,7 +14,7 @@ class HomeViewModel {
     context.read<GetPokemonCubit>().getAllPokemon();
   }
 
-  void extendPokemons() {
-    context.read<GetPokemonCubit>().extend(context);
+  void extendPokemons(PokemonModel pokemon) {
+    context.read<GetPokemonCubit>().extend(context, pokemon);
   }
 }
