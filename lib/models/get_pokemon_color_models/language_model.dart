@@ -1,7 +1,7 @@
-class AbilityDetailModel {
+class LanguageModel {
   late String name, url;
 
-  AbilityDetailModel.fromJson(Map<String, dynamic> json) {
+  LanguageModel.fromJson(Map<String, dynamic> json) {
     this.name = json['name'];
     this.url = json['url'];
   }

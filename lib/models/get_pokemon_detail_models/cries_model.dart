@@ -1,6 +1,5 @@
 class CriesModel {
-  late String latest;
-  late String legacy;
+  late String latest, legacy;
 
   CriesModel.fromJson(Map<String, dynamic> json) {
     this.latest = json['latest'];

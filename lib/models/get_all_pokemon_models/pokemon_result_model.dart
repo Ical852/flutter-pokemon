@@ -1,6 +1,5 @@
 class PokemonResultModel {
-  late String name;
-  late String url;
+  late String name, url;
 
   PokemonResultModel.fromJson(Map<String, dynamic> json) {
     this.name = json['name'];

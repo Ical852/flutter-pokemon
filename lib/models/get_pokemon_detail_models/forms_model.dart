@@ -1,6 +1,5 @@
 class FormsModel {
-  late String name;
-  late String url;
+  late String name, url;
 
   FormsModel.fromJson(Map<String, dynamic> json) {
     this.name = json['name'];

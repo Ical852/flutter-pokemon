@@ -4,8 +4,7 @@ import 'package:flutterpokemon/models/get_all_pokemon_models/pokemon_result_mode
 
 class PokemonModel {
   late Int count;
-  late String? next;
-  late String? previous;
+  late String? next, previous;
   late List<PokemonResultModel> results;
 
   PokemonModel.fromJson(Map<String, dynamic> json) {

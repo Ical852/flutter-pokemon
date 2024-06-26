@@ -1,4 +1,16 @@
-class MoveModel {}
+class MoveModel {
+  late MoveDetailModel move;
+
+  MoveModel.fromJson(Map<String, dynamic> json) {
+    this.move = MoveDetailModel.fromJson(json['move']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "move": this.move.toJson()
+    };
+  }
+}
 
 class MoveDetailModel {
   late String name, url;
