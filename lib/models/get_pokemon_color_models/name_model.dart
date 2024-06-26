@@ -6,8 +6,8 @@ class NameModel {
   late LanguageModel? language;
 
   NameModel.fromJson(Map<String, dynamic> json) {
-    this.name = nullChecker(json['name'], json['name']);
-    this.language = nullChecker(json['language'], LanguageModel.fromJson(json['language']));
+    this.name = nullChecker(json['name']);
+    this.language = isNotNull(json['language']) ? LanguageModel.fromJson(json['language']) : null;
   }
 
   Map<String, dynamic> toJson() {

@@ -11,10 +11,10 @@ class OtherModel {
   late ShowdownModel? showdown;
 
   OtherModel.fromJson(Map<String, dynamic> json) {
-    this.dreamWorld = nullChecker(json['dream_world'], DreamWorldModel.fromJson(json['dream_world']));
-    this.home = nullChecker(json['home'], HomeModel.fromJson(json['home']));
-    this.officialArtwork = nullChecker(json['official-artwork'], OfficialArtworkModel.fromJson(json['official-artwork']));
-    this.showdown = nullChecker(json['showdown'], ShowdownModel.fromJson(json['showdown'])) ;
+    this.dreamWorld = isNotNull(json['dream_world']) ? DreamWorldModel.fromJson(json['dream_world']) : null;
+    this.home = isNotNull(json['home']) ? HomeModel.fromJson(json['home']) : null;
+    this.officialArtwork = isNotNull(json['official-artwork']) ? OfficialArtworkModel.fromJson(json['official-artwork']) : null;
+    this.showdown = isNotNull(json['showdown']) ? ShowdownModel.fromJson(json['showdown']) : null ;
   }
 
   Map<String, dynamic> toJson() {

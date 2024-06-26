@@ -22,35 +22,35 @@ class PokemonDetailModel {
   late List<TypeModel>? types;
 
   PokemonDetailModel.fromJson(Map<String, dynamic> json) {
-    this.id = nullChecker(json['id'], json['id']);
-    this.height = nullChecker(json['height'], json['height']);
-    this.order = nullChecker(json['order'], json['order']);
-    this.baseExperience = nullChecker(json['base_experience'], json['base_experience']);
+    this.id = nullChecker(json['id']);
+    this.height = nullChecker(json['height']);
+    this.order = nullChecker(json['order']);
+    this.baseExperience = nullChecker(json['base_experience']);
 
-    this.isDefault = nullChecker(json['is_default'], json['is_default']);
+    this.isDefault = nullChecker(json['is_default']);
 
-    this.name = nullChecker(json['name'], json['name']);
-    this.locationAreaEncounters = nullChecker(json['location_area_encounters'], json['location_area_encounters']);
+    this.name = nullChecker(json['name']);
+    this.locationAreaEncounters = nullChecker(json['location_area_encounters']);
 
-    this.cries = nullChecker(json['cries'], CriesModel.fromJson(json['cries']));
-    this.species = nullChecker(json['species'], SpeciesModel.fromJson(json['species']));
-    this.sprites = nullChecker(json['sprites'], SpriteModel.fromJson(json['sprites']));
+    this.cries = isNotNull(json['cries']) ? CriesModel.fromJson(json['cries']) : null;
+    this.species = isNotNull(json['species']) ? SpeciesModel.fromJson(json['species']) : null;
+    this.sprites = isNotNull(json['sprites']) ? SpriteModel.fromJson(json['sprites']) : null;
 
-    this.abilities = nullChecker(json['abilities'], json['abilities']
+    this.abilities = isNotNull(json['abilities']) ? json['abilities']
             .map<AbilityModel>((result) => AbilityModel.fromJson(result))
-            .toList());
-    this.forms = nullChecker(json['forms'], json['forms']
+            .toList() : null;
+    this.forms = isNotNull(json['forms']) ? json['forms']
             .map<FormsModel>((result) => FormsModel.fromJson(result))
-            .toList());
-    this.moves = nullChecker(json['moves'], json['moves']
+            .toList() : null;
+    this.moves = isNotNull(json['moves']) ? json['moves']
             .map<MoveModel>((result) => MoveModel.fromJson(result))
-            .toList());
-    this.stats = nullChecker(json['stats'], json['stats']
-            .map<AbilityModel>((result) => AbilityModel.fromJson(result))
-            .toList());
-    this.types = nullChecker(json['types'], json['types']
-            .map<AbilityModel>((result) => AbilityModel.fromJson(result))
-            .toList());
+            .toList() : null;
+    this.stats = isNotNull(json['stats']) ? json['stats']
+            .map<StatsModel>((result) => StatsModel.fromJson(result))
+            .toList() : null;
+    this.types = isNotNull(json['types'], ) ? json['types']
+            .map<TypeModel>((result) => TypeModel.fromJson(result))
+            .toList() : null;
   }
 
   Map<String, dynamic> toJson() {

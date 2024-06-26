@@ -4,8 +4,8 @@ class CriesModel {
   late String? latest, legacy;
 
   CriesModel.fromJson(Map<String, dynamic> json) {
-    this.latest = nullChecker(json['latest'], json['latest']);
-    this.legacy = nullChecker(json['legacy'], json['legacy']);
+    this.latest = nullChecker(json['latest']);
+    this.legacy = nullChecker(json['legacy']);
   }
 
   Map<String, dynamic> toJson() {

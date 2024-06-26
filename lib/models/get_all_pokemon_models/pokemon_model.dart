@@ -6,14 +6,16 @@ class PokemonModel {
   late String? next, previous;
   late List<PokemonResultModel>? results;
 
+ void asda (){}
+
   PokemonModel.fromJson(Map<String, dynamic> json) {
-    this.count = nullChecker(json['count'], json['count']);
-    this.next = nullChecker(json['next'], json['next']);
-    this.previous = nullChecker(json['previous'], json['previous']);
-    this.results = nullChecker(json['results'], json['results']
+    this.count = nullChecker(json['count']);
+    this.next = nullChecker(json['next']);
+    this.previous = nullChecker(json['previous']);
+    this.results = isNotNull(json['results']) ? json['results']
     .map<PokemonResultModel>(
         (result) => PokemonResultModel.fromJson(result))
-    .toList());
+    .toList() : null;
   }
 
   void updateValues(PokemonModel pokemon) {

@@ -13,15 +13,15 @@ class SpriteModel {
   late OtherModel? other;
 
   SpriteModel.fromJson(Map<String, dynamic> json) {
-    this.backDefault = nullChecker(json['back_default'], json['back_default']);
-    this.backFemale = nullChecker(json['back_female'], json['back_female']);
-    this.backShiny = nullChecker(json['back_shiny'], json['back_shiny']);
-    this.backShinyFemale = nullChecker(json['back_shiny_female'], json['back_shiny_female']);
-    this.frontDefault = nullChecker(json['front_default'], json['front_default']);
-    this.frontFemale = nullChecker(json['front_female'], json['front_female']);
-    this.frontShiny = nullChecker(json['front_shiny'], json['front_shiny']);
-    this.frontShinyFemale = nullChecker(json['front_shiny_female'], json['front_shiny_female']);
-    this.other = nullChecker(json['other'], OtherModel.fromJson(json['other']));
+    this.backDefault = nullChecker(json['back_default']);
+    this.backFemale = nullChecker(json['back_female']);
+    this.backShiny = nullChecker(json['back_shiny']);
+    this.backShinyFemale = nullChecker(json['back_shiny_female']);
+    this.frontDefault = nullChecker(json['front_default']);
+    this.frontFemale = nullChecker(json['front_female']);
+    this.frontShiny = nullChecker(json['front_shiny']);
+    this.frontShinyFemale = nullChecker(json['front_shiny_female']);
+    this.other = isNotNull(json['other']) ? OtherModel.fromJson(json['other']) : null;
   }
 
   Map<String, dynamic> toJson() {

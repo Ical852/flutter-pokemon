@@ -5,9 +5,9 @@ class StatsModel {
   late StatsDetailModel? stat;
 
   StatsModel.fromJson(Map<String, dynamic> json) {
-    this.baseStat = nullChecker(json['base_stat'], json['base_stat']);
-    this.effort = nullChecker(json['effort'], json['effort']);
-    this.stat = StatsDetailModel.fromJson(json['stat']);
+    this.baseStat = nullChecker(json['base_stat']);
+    this.effort = nullChecker(json['effort']);
+    this.stat = isNotNull(json['stat']) ? StatsDetailModel.fromJson(json['stat']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -23,8 +23,8 @@ class StatsDetailModel {
   late String? name, url;
 
   StatsDetailModel.fromJson(Map<String, dynamic> json) {
-    this.name = nullChecker(json['name'], json['name']);
-    this.url = nullChecker(json['url'], json['url']);
+    this.name = nullChecker(json['name']);
+    this.url = nullChecker(json['url']);
   }
 
   Map<String, dynamic> toJson() {

@@ -4,8 +4,8 @@ class OfficialArtworkModel {
   late String? frontDefault, frontShiny;
 
   OfficialArtworkModel.fromJson(Map<String, dynamic> json) {
-    this.frontDefault = nullChecker(json['front_default'], json['front_default']);
-    this.frontShiny = nullChecker(json['front_shiny'], json['front_shiny']);
+    this.frontDefault = nullChecker(json['front_default']);
+    this.frontShiny = nullChecker(json['front_shiny']);
   }
 
   Map<String, dynamic> toJson() {

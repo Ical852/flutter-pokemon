@@ -8,8 +8,8 @@ class PokemonResultModel {
   late PokemonColorModel color;
 
   PokemonResultModel.fromJson(Map<String, dynamic> json) {
-    this.name = nullChecker(json['name'], json['name']);
-    this.url = nullChecker(json['url'], json['url']);
+    this.name = nullChecker(json['name']);
+    this.url = nullChecker(json['url']);
   }
 
   void setPokemonDetail(PokemonDetailModel detail) {

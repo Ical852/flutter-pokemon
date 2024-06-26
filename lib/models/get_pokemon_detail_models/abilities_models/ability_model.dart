@@ -7,9 +7,9 @@ class AbilityModel {
   late int? slot;
 
   AbilityModel.fromJson(Map<String, dynamic> json) {
-    this.ability = nullChecker(json['ability'], AbilityDetailModel.fromJson(json['ability']));
-    this.isHidden = nullChecker(json['is_hidden'], json['is_hidden']);
-    this.slot = nullChecker(json['slot'], json['slot']);
+    this.ability = isNotNull(json['ability']) ? AbilityDetailModel.fromJson(json['ability']): null;
+    this.isHidden = nullChecker(json['is_hidden']);
+    this.slot = nullChecker(json['slot']);
   }
 
   Map<String, dynamic> toJson() {

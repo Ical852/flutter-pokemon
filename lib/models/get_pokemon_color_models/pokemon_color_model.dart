@@ -9,14 +9,14 @@ class PokemonColorModel {
   late List<SpeciesModel>? pokemonSpecies;
 
   PokemonColorModel.fromJson(Map<String, dynamic> json) {
-    this.id = nullChecker(json['id'], json['id']);
-    this.name = nullChecker(json['name'], json['name']);
-    this.names = nullChecker(json['names'], json['names']
+    this.id = nullChecker(json['id']);
+    this.name = nullChecker(json['name']);
+    this.names = isNotNull(json['names']) ? json['names']
       .map<NameModel>((result) => NameModel.fromJson(result))
-      .toList());
-    this.pokemonSpecies = nullChecker(json['pokemon_species'], json['pokemon_species']
+      .toList() : null;
+    this.pokemonSpecies = isNotNull(json['pokemon_species']) ? json['pokemon_species']
       .map<SpeciesModel>((result) => SpeciesModel.fromJson(result))
-      .toList());
+      .toList() : null;
   }
 
   Map<String, dynamic> toJson() {
