@@ -1,4 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutterpokemon/models/get_pokemon_detail_models/sprite_models/other_models/showdown_model.dart';
+import 'package:flutterpokemon/models/get_pokemon_detail_models/sprite_models/sprite_model.dart';
 import 'package:flutterpokemon/shared/constants.dart';
 import 'package:flutterpokemon/shared/text_styles.dart';
 
@@ -48,4 +52,32 @@ double getWH(BuildContext context, String type) {
 String capitalize(String text) {
   if (text.isEmpty) return text;
   return text[0].toUpperCase() + text.substring(1); 
+}
+
+List<dynamic> getGifList(ShowdownModel show){
+  var list = [];
+  var setup = show.toJson();
+
+  list.add(show.frontDefault);
+  for (var keys in setup.keys) {
+    if (setup[keys] != null && keys != 'frontDefault') {
+      list.add(setup[keys]);
+    }
+  }
+
+  return list;
+}
+
+List<dynamic> getPicList(SpriteModel sprites) {
+  var list = [];
+  var setup = sprites.toJson();
+
+  list.add(sprites.frontDefault);
+  for (var keys in setup.keys) {
+    if (setup[keys] != null && keys != 'frontDefault' && keys != 'other') {
+      list.add(setup[keys]);
+    }
+  }
+
+  return list;
 }

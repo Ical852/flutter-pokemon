@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutterpokemon/functions/global_func.dart';
 import 'package:flutterpokemon/shared/constants.dart';
 import 'package:flutterpokemon/shared/text_styles.dart';
 
 class PokemonType extends StatelessWidget {
   String type;
-  PokemonType({super.key,  required this.type});
+  bool big;
+  PokemonType({super.key,  required this.type, this.big = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        bottom: 4
+        bottom: 4,
+        right: big ? 4 : 0
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 2
+        horizontal: big ? 20 : 10,
+        vertical: big ? 4 : 2
       ),
       decoration: BoxDecoration(
         color: getPokeColor(type),
@@ -31,8 +34,8 @@ class PokemonType extends StatelessWidget {
         ]
       ),
       child: Text(
-        this.type,
-        style: small.white.semiBold,
+        big ? capitalize(this.type) : this.type,
+        style: (big ? regular : small).white.semiBold,
       ),
     );
   }

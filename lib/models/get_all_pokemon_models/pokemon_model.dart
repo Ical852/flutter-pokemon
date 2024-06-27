@@ -23,10 +23,8 @@ class PokemonModel {
       this.count = this.count! + pokemon.count!;
     }
 
-    if (this.next != null && this.previous != null && pokemon.next != null && pokemon.previous != null) {
-      this.next = pokemon.next;
-      this.previous = pokemon.previous;
-    }
+    this.next = pokemon.next;
+    this.previous = pokemon.previous;
 
     if (this.results != null && pokemon.results != null) {
       if (this.results!.isNotEmpty && pokemon.results!.isNotEmpty){
