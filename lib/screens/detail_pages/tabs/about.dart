@@ -35,22 +35,22 @@ class AboutContent extends StatelessWidget {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: datas.keys
-                .map((key) => Container(
-                      margin: EdgeInsets.only(bottom: 12),
-                      child: Text(
-                        key,
-                        style: regular.mediumF
-                            .copyWith(color: greyColor.withOpacity(0.7)),
-                      ),
-                    ))
-                .toList(),
-          ),
-          SizedBox(
-            width: 50,
+          Container(
+            width: 100,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: datas.keys
+                  .map((key) => Container(
+                        margin: EdgeInsets.only(bottom: 12),
+                        child: Text(
+                          key,
+                          style: regular.mediumF
+                              .copyWith(color: greyColor.withOpacity(0.7)),
+                        ),
+                      ))
+                  .toList(),
+            ),
           ),
           Expanded(
             child: Column(
