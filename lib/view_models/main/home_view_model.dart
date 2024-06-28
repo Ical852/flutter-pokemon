@@ -11,10 +11,10 @@ class HomeViewModel {
   }
 
   void getAllPokemons() {
-    context.read<GetPokemonCubit>().getAllPokemon();
+    context.read<GetPokemonCubit>().getAllPokemon(this.context);
   }
 
   void extendPokemons(PokemonModel pokemon) {
-    context.read<GetPokemonCubit>().extend(context, pokemon);
+    context.read<GetPokemonCubit>().extend(this.context, "extend", pokemon);
   }
 }

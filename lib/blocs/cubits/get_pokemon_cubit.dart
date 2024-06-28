@@ -9,9 +9,17 @@ part '../states/get_pokemon_state.dart';
 class GetPokemonCubit extends Cubit<GetPokemonState> {
   GetPokemonCubit() : super(GetPokemonInitial());
 
-  void getAllPokemon() async {
-    emit(GetPokemonLoading());
-    PokemonModel? pokemon = await PokemonServices().getAllPokemon();
+  void setCount(int value) {
+    emit(GetPokemonLoading(value));
+  }
+
+  void setExtendCount(PokemonModel pokemon, int extendCount) {
+    emit(GetPokemonExtendsLoading(pokemon, extendCount));
+  }
+
+  void getAllPokemon(BuildContext context) async {
+    emit(GetPokemonLoading(0));
+    PokemonModel? pokemon = await PokemonServices(context).getAllPokemon();
     if (pokemon != null) {
       emit(GetPokemonSuccess(pokemon));
     }
@@ -20,15 +28,19 @@ class GetPokemonCubit extends Cubit<GetPokemonState> {
     }
   }
 
-  void extend(BuildContext context, PokemonModel currentPokemon) async {
-    emit(GetPokemonExtendsLoading(currentPokemon));
-    PokemonModel? pokemon = await PokemonServices().getAllPokemon(actionUrl: currentPokemon.next);
+  void extend(
+      BuildContext context, String type, PokemonModel currentPokemon) async {
+    emit(GetPokemonExtendsLoading(currentPokemon, 0));
+    PokemonModel? pokemon = await PokemonServices(context).getAllPokemon(
+        actionUrl: currentPokemon.next,
+        currentPokemon: currentPokemon,
+        type: "extend");
     if (pokemon != null) {
       currentPokemon.updateValues(pokemon);
       emit(GetPokemonSuccess(currentPokemon));
     }
     if (pokemon == null) {
-      emit(GetPokemonFailed("Failed to extends pokemon data"));
+      emit(GetPokemonExtendFailed(currentPokemon));
     }
   }
 }

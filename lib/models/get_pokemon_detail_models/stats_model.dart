@@ -7,7 +7,9 @@ class StatsModel {
   StatsModel.fromJson(Map<String, dynamic> json) {
     this.baseStat = nullChecker(json['base_stat']);
     this.effort = nullChecker(json['effort']);
-    this.stat = isNotNull(json['stat']) ? StatsDetailModel.fromJson(json['stat']) : null;
+    this.stat = isNotNull(json['stat'])
+        ? StatsDetailModel.fromJson(json['stat'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -25,6 +27,12 @@ class StatsDetailModel {
   StatsDetailModel.fromJson(Map<String, dynamic> json) {
     this.name = nullChecker(json['name']);
     this.url = nullChecker(json['url']);
+  }
+
+  String reFormat(String name) {
+    if (name == 'special-attack') return "Sp. Atk";
+    if (name == 'special-defense') return "Sp. Def";
+    return name;
   }
 
   Map<String, dynamic> toJson() {

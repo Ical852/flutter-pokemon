@@ -4,19 +4,20 @@ import 'package:flutterpokemon/shared/text_styles.dart';
 
 class LoadMoreButton extends StatelessWidget {
   Function() onPress;
-  
-  LoadMoreButton({ required this.onPress });
-  
+  String title;
+  Color color;
+
+  LoadMoreButton(
+      {required this.onPress,
+      this.title = "Load More",
+      this.color = Colors.blue});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 24
-      ),
+      margin: EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: infoColor
-      ),
+          borderRadius: BorderRadius.circular(8), color: this.color),
       width: double.infinity,
       height: 45,
       child: ElevatedButton(
@@ -25,10 +26,7 @@ class LoadMoreButton extends StatelessWidget {
           shadowColor: Colors.transparent.withOpacity(0.1),
         ),
         onPressed: this.onPress,
-        child: Text(
-          "Load More",
-          style: medium.white.semiBold
-        ),
+        child: Text(title, style: medium.white.semiBold),
       ),
     );
   }

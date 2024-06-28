@@ -21,6 +21,11 @@ class PokemonResultModel {
   }
 
   Map<String, dynamic> toJson() {
-    return {"name": this.name, "url": this.url, "detail": this.detail?.toJson(), "color": this.color?.toJson()};
+    return {
+      "name": this.name,
+      "url": this.url,
+      "detail": this.detail?.toJson(),
+      "color": this.color?.toJson()
+    };
   }
 }

@@ -2,6 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpokemon/functions/global_func.dart';
 import 'package:flutterpokemon/models/get_all_pokemon_models/pokemon_result_model.dart';
+import 'package:flutterpokemon/screens/detail_pages/tabs/about.dart';
+import 'package:flutterpokemon/screens/detail_pages/tabs/baseStats.dart';
+import 'package:flutterpokemon/screens/detail_pages/tabs/evolution.dart';
+import 'package:flutterpokemon/screens/detail_pages/tabs/moves.dart';
 import 'package:flutterpokemon/shared/constants.dart';
 import 'package:flutterpokemon/shared/text_styles.dart';
 import 'package:flutterpokemon/widgets/detail/detail_image.dart';
@@ -31,8 +35,6 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     final List<String> tabpages = ["About", "Base Stats", "Evolution", "Moves"];
-    final double screenHeight = getWH(context, "height");
-    final double screenWidth = getWH(context, "width");
     final detail = this.widget.pokemon.detail;
     final bgColor = detail!.bgColor;
     final gifList = getGifList(detail.sprites!.other!.showdown!);
@@ -46,21 +48,19 @@ class _DetailPageState extends State<DetailPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
               },
               child: Container(
                 width: 24,
                 height: 24,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/ic_chevron_left.png")
-                  )
-                ),
+                    image: DecorationImage(
+                        image: AssetImage("assets/ic_chevron_left.png"))),
               ),
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 var newState = this.type == "gifs" ? "pics" : "gifs";
                 setState(() {
                   this.type = newState;
@@ -70,10 +70,8 @@ class _DetailPageState extends State<DetailPage> {
                 width: 24,
                 height: 24,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/ic_change.png")
-                  )
-                ),
+                    image: DecorationImage(
+                        image: AssetImage("assets/ic_change.png"))),
               ),
             ),
           ],
@@ -83,11 +81,7 @@ class _DetailPageState extends State<DetailPage> {
 
     Widget description() {
       return Container(
-        margin: EdgeInsets.only(
-          top: 72,
-          left: 24,
-          right: 24
-        ),
+        margin: EdgeInsets.only(top: 72, left: 24, right: 24),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,19 +91,16 @@ class _DetailPageState extends State<DetailPage> {
               children: [
                 Text(
                   capitalize(detail.name!),
-                  style: extra.white.semiBold.copyWith(
-                    fontSize: 32
-                  ),
+                  style: extra.white.semiBold.copyWith(fontSize: 32),
                 ),
                 SizedBox(height: 6),
                 Row(
-                  children: detail.types!.map((type) => 
-                    PokemonType(
-                      big: true,
-                        type: type.type!.name!,
-                      )
-                    )
-                  .toList(),
+                  children: detail.types!
+                      .map((type) => PokemonType(
+                            big: true,
+                            type: type.type!.name!,
+                          ))
+                      .toList(),
                 )
               ],
             ),
@@ -126,49 +117,38 @@ class _DetailPageState extends State<DetailPage> {
       bool isCurrent = index == this.currentSlide;
 
       return Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: 3
-        ),
+        margin: EdgeInsets.symmetric(horizontal: 3),
         width: isCurrent ? 24 : 8,
         height: 8,
         decoration: BoxDecoration(
-          color: isCurrent ? bgColor : greyColor.withOpacity(0.5),
-          borderRadius: BorderRadius.circular(4)
-        ),
+            color: isCurrent ? bgColor : greyColor.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(4)),
       );
     }
-    Widget arrowSlider(String type, Function() onPress){
+
+    Widget arrowSlider(String type, Function() onPress) {
       return Positioned(
         right: type == 'right' ? 10 : null,
         left: type == 'left' ? 10 : null,
         top: 0,
         bottom: 0,
         child: IconButton(
-          icon: Icon(
-            type == 'right' ? Icons.arrow_forward : Icons.arrow_back,
-            size: 30,
-            color: Colors.white
-          ),
-        onPressed: onPress,
+          icon: Icon(type == 'right' ? Icons.arrow_forward : Icons.arrow_back,
+              size: 30, color: Colors.white),
+          onPressed: onPress,
         ),
       );
     }
+
     int index = -1;
     Widget carousel() {
       return CarouselSlider(
         carouselController: _controller,
-        items: pokeList
-          .map((image) => 
-            DetailImage(
-              image: image,
-              height: screenWidth,
-              width: screenWidth
-            )
-        ).toList(),
+        items: pokeList.map((image) => DetailImage(image: image)).toList(),
         options: CarouselOptions(
           viewportFraction: 1.0,
           initialPage: 0,
-          onPageChanged: (index, reason){
+          onPageChanged: (index, reason) {
             setState(() {
               this.currentSlide = index;
             });
@@ -176,11 +156,10 @@ class _DetailPageState extends State<DetailPage> {
         ),
       );
     }
+
     Widget pokemonIndicator() {
       return Container(
-        margin: EdgeInsets.only(
-          top: 12
-        ),
+        margin: EdgeInsets.only(top: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: pokeList.map((tes) {
@@ -190,34 +169,30 @@ class _DetailPageState extends State<DetailPage> {
         ),
       );
     }
+
     Widget pokemonImage() {
       return Align(
         alignment: Alignment.topCenter,
         child: Column(
           children: [
             Container(
-              width: screenWidth,
-              margin: EdgeInsets.only(
-                top: screenHeight * 0.21
-              ),
+              margin: EdgeInsets.only(top: 180),
               child: Stack(
                 children: [
                   carousel(),
-                  arrowSlider('left', (){
+                  arrowSlider('left', () {
                     _controller.previousPage(
-                      duration: Duration(
-                        milliseconds: 800,
-                      ),
-                      curve: Curves.ease
-                    );
+                        duration: Duration(
+                          milliseconds: 800,
+                        ),
+                        curve: Curves.ease);
                   }),
                   arrowSlider('right', () {
                     _controller.nextPage(
-                      duration: Duration(
-                        milliseconds: 800,
-                      ),
-                      curve: Curves.ease
-                    );
+                        duration: Duration(
+                          milliseconds: 800,
+                        ),
+                        curve: Curves.ease);
                   }),
                 ],
               ),
@@ -233,46 +208,65 @@ class _DetailPageState extends State<DetailPage> {
         margin: EdgeInsets.only(top: 48),
         child: Container(
           decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: greyColor.withOpacity(0.5)
-              )
-            )
-          ),
+              border: Border(
+                  bottom: BorderSide(color: greyColor.withOpacity(0.5)))),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: tabpages
-              .map((tab) => 
-                TabsItem(
-                  text: tab,
-                  currentTab: currentTab,
-                  onPress: () {
-                    setState(() {
-                      currentTab = tab;
-                    });
-                  },
-                ))
-              .toList(),
+                .map((tab) => TabsItem(
+                      text: tab,
+                      currentTab: currentTab,
+                      onPress: () {
+                        setState(() {
+                          currentTab = tab;
+                        });
+                      },
+                    ))
+                .toList(),
           ),
         ),
       );
     }
+
+    Widget tabContent() {
+      switch (this.currentTab) {
+        case "About":
+          return AboutContent(
+            detail: detail,
+          );
+        case "Base Stats":
+          return BaseStatsContent(
+            detail: detail,
+          );
+        case "Evolution":
+          return EvolutionContent();
+        case "Moves":
+          return MovesContent();
+        default:
+          return AboutContent(
+            detail: detail,
+          );
+      }
+    }
+
     Widget detailData() {
       return Align(
         alignment: Alignment.topCenter,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-          margin: EdgeInsets.only(top: screenHeight * 0.48),
+          margin: EdgeInsets.only(top: 380),
           decoration: BoxDecoration(
-            color: whiteColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(24), 
-              topRight: Radius.circular(24)
-            )
-          ),
+              color: whiteColor,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24), topRight: Radius.circular(24))),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               tabs(),
+              SizedBox(
+                height: 20,
+              ),
+              tabContent(),
             ],
           ),
         ),

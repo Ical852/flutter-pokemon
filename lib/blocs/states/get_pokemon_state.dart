@@ -9,15 +9,13 @@ sealed class GetPokemonState extends Equatable {
 
 final class GetPokemonInitial extends GetPokemonState {}
 
-final class GetPokemonLoading extends GetPokemonState {}
+final class GetPokemonLoading extends GetPokemonState {
+  final int count;
 
-final class GetPokemonExtendsLoading extends GetPokemonState {
-  final PokemonModel pokemon;
-
-  GetPokemonExtendsLoading(this.pokemon);
+  GetPokemonLoading(this.count);
 
   @override
-  List<Object> get props => [pokemon];
+  List<Object> get props => [count];
 }
 
 final class GetPokemonSuccess extends GetPokemonState {
@@ -36,4 +34,23 @@ final class GetPokemonFailed extends GetPokemonState {
 
   @override
   List<Object> get props => [error];
+}
+
+final class GetPokemonExtendsLoading extends GetPokemonState {
+  final PokemonModel pokemon;
+  final int extendCount;
+
+  GetPokemonExtendsLoading(this.pokemon, this.extendCount);
+
+  @override
+  List<Object> get props => [pokemon, extendCount];
+}
+
+final class GetPokemonExtendFailed extends GetPokemonState {
+  final PokemonModel pokemon;
+
+  GetPokemonExtendFailed(this.pokemon);
+
+  @override
+  List<Object> get props => [pokemon];
 }
