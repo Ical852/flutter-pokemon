@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/sprite_models/other_models/showdown_model.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/sprite_models/sprite_model.dart';

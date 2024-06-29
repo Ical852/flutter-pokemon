@@ -11,8 +11,9 @@ final class GetPokemonInitial extends GetPokemonState {}
 
 final class GetPokemonLoading extends GetPokemonState {
   final int count;
+  final List<SavedEvolutionModel> savedEvolves;
 
-  GetPokemonLoading(this.count);
+  GetPokemonLoading(this.count, this.savedEvolves);
 
   @override
   List<Object> get props => [count];
@@ -39,8 +40,9 @@ final class GetPokemonFailed extends GetPokemonState {
 final class GetPokemonExtendsLoading extends GetPokemonState {
   final PokemonModel pokemon;
   final int extendCount;
+  final List<SavedEvolutionModel> savedEvolves;
 
-  GetPokemonExtendsLoading(this.pokemon, this.extendCount);
+  GetPokemonExtendsLoading(this.pokemon, this.extendCount, this.savedEvolves);
 
   @override
   List<Object> get props => [pokemon, extendCount];

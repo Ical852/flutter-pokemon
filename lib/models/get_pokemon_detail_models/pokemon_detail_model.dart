@@ -9,6 +9,7 @@ import 'package:flutterpokemon/models/get_pokemon_detail_models/species_model.da
 import 'package:flutterpokemon/models/get_pokemon_detail_models/sprite_models/sprite_model.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/stats_model.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/type_model.dart';
+import 'package:flutterpokemon/models/get_pokemon_species_models/get_pokemon_species_model.dart';
 import 'package:flutterpokemon/shared/constants.dart';
 
 class PokemonDetailModel {
@@ -20,6 +21,7 @@ class PokemonDetailModel {
   late SpeciesModel? species;
   late SpriteModel? sprites;
   late EggGroupModel? group = null;
+  late GetPokemonSpeciesModel? speciesDetail = null;
   late List<AbilityModel>? abilities;
   late List<FormsModel>? forms;
   late List<MoveModel>? moves;
@@ -85,6 +87,10 @@ class PokemonDetailModel {
 
   void setEvolutions(List<PokemonDetailModel> evolutions) {
     this.evolutions = evolutions;
+  }
+
+  void setSpeciesDetail(GetPokemonSpeciesModel speciesDetail) {
+    this.speciesDetail = speciesDetail;
   }
 
   Map<String, dynamic> toJson() {

@@ -1,17 +1,16 @@
 import 'package:flutterpokemon/functions/global_func.dart';
 
-class GetPokemonSpeciesModel {}
+class GetPokemonSpeciesModel {
+  late EvolutionChainModel? evolutionChain;
 
-class EggGrouopsModel {
-  late String? name, url;
-
-  EggGrouopsModel.fromJson(Map<String, dynamic> json) {
-    this.name = nullChecker(json['name']);
-    this.url = nullChecker(json['url']);
+  GetPokemonSpeciesModel.fromJson(Map<String, dynamic> json){
+    this.evolutionChain = isNotNull(json['evolution_chain']) ? EvolutionChainModel.fromJson(json['evolution_chain']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    return {"name": this.name, "url": this.url};
+    return {
+      "evolution_chain": this.evolutionChain?.toJson()
+    };
   }
 }
 
