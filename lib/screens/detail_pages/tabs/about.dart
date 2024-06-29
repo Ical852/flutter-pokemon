@@ -20,7 +20,7 @@ class AboutContent extends StatelessWidget {
     Map<String, String> abouts = {
       "Species": capitalize(detail.species!.name!),
       "Height": detail.height.toString() + " cm",
-      "Weight": detail.height.toString() + " kg",
+      "Weight": detail.weight.toString() + " kg",
       "Abilities": detail.abilities!
           .map((ability) => capitalize(ability.ability!.name!))
           .join(', ')

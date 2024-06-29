@@ -40,12 +40,19 @@ class MovesContent extends StatelessWidget {
                   children: move.versionGroupDetails!.map((det) {
                     return Container(
                       margin: EdgeInsets.only(left: 28, bottom: 4),
-                      child: Text(
-                        capitalize(det.moveLearnMethod!.name!) +
-                            " - " +
-                            capitalize(det.versionGroup!.name!),
-                        style:
-                            regular.copyWith(color: greyColor.withOpacity(0.7)),
+                      child: Row(
+                        children: [
+                          Text(
+                            capitalize(det.moveLearnMethod!.name!),
+                            style:
+                                regular.mediumF.copyWith(color: detail.bgColor),
+                          ),
+                          Text(
+                            " - " + capitalize(det.versionGroup!.name!),
+                            style: regular.copyWith(
+                                color: blackColor.withOpacity(0.5)),
+                          ),
+                        ],
                       ),
                     );
                   }).toList(),

@@ -12,6 +12,7 @@ import 'package:flutterpokemon/models/get_pokemon_detail_models/type_model.dart'
 import 'package:flutterpokemon/shared/constants.dart';
 
 class PokemonDetailModel {
+  late Color? bgColor;
   late int? id, height, order, baseExperience, weight;
   late bool? isDefault;
   late String? name, locationAreaEncounters;
@@ -24,7 +25,7 @@ class PokemonDetailModel {
   late List<MoveModel>? moves;
   late List<StatsModel>? stats;
   late List<TypeModel>? types;
-  late Color? bgColor;
+  late List<PokemonDetailModel>? evolutions = null;
 
   PokemonDetailModel.fromJson(Map<String, dynamic> json) {
     this.id = nullChecker(json['id']);
@@ -80,6 +81,10 @@ class PokemonDetailModel {
 
   void setPokemonGroup(EggGroupModel group) {
     this.group = group;
+  }
+
+  void setEvolutions(List<PokemonDetailModel> evolutions) {
+    this.evolutions = evolutions;
   }
 
   Map<String, dynamic> toJson() {
