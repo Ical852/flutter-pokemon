@@ -239,7 +239,9 @@ class _DetailPageState extends State<DetailPage> {
             detail: detail,
           );
         case "Evolution":
-          return EvolutionContent();
+          return EvolutionContent(
+            detail: detail,
+          );
         case "Moves":
           return MovesContent(
             detail: detail,

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterpokemon/blocs/cubits/get_pokemon_cubit.dart';
 import 'package:flutterpokemon/models/get_all_pokemon_models/pokemon_model.dart';
+import 'package:flutterpokemon/models/get_all_pokemon_models/pokemon_result_model.dart';
 import 'package:flutterpokemon/models/get_pokemon_color_models/pokemon_color_model.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/egg_group_model.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/pokemon_detail_model.dart';
@@ -28,9 +29,55 @@ class PokemonServices {
     }
   }
 
-  void setupEvolutions(GetPokemonEvolutionModel evolutions) {
+  List<PokemonDetailModel> setupEvolutions(
+      GetPokemonEvolutionModel evolutions, List<PokemonResultModel> results) {
     List<PokemonDetailModel> setupEvolves = [];
 
+    var minFind = evolutions.chain?.species?.name!;
+    var midSet = evolutions.chain?.evolvesTo;
+    var midFind = null;
+    var maxFind = null;
+
+    if (midSet != null && midSet.isNotEmpty) {
+      midFind = midSet.first.species?.name;
+
+      var maxSet = midSet.first.evolvesTo;
+      if (maxSet != null && maxSet.isNotEmpty) {
+        maxFind = maxSet.first.species!.name;
+      }
+    }
+
+    if (minFind != null) {
+      try {
+        PokemonResultModel? minFinded =
+            results.firstWhere((find) => find.name == minFind);
+        if (minFinded.name != null) {
+          setupEvolves.add(minFinded.detail!);
+        }
+      } catch (e) {}
+    }
+
+    if (midFind != null) {
+      try {
+        PokemonResultModel? midFinded =
+            results.firstWhere((find) => find.name == midFind);
+        if (midFinded.name != null) {
+          setupEvolves.add(midFinded.detail!);
+        }
+      } catch (e) {}
+    }
+
+    if (maxFind != null) {
+      try {
+        PokemonResultModel? maxFinded =
+            results.firstWhere((find) => find.name == maxFind);
+        if (maxFinded.name != null) {
+          setupEvolves.add(maxFinded.detail!);
+        }
+      } catch (e) {}
+    }
+
+    return setupEvolves;
   }
 
   Future<PokemonModel?> getAllPokemon({
@@ -61,7 +108,7 @@ class PokemonServices {
         if (getDetail == null) return null;
         results[i].setPokemonDetail(getDetail);
         if (getDetail.id == null) return null;
-        
+
         var getColor = await getPokemonColor(id: getDetail.id!);
         if (getColor != null) {
           results[i].setPokemonColor(getColor);
@@ -80,9 +127,16 @@ class PokemonServices {
       }
 
       for (int i = 0; i < results.length; i++) {
-        var getEvolves = await getPokemonEvolutions(id: results[i].detail!.id!);
+        var evolveUrl = results[i].detail!.speciesDetail!.evolutionChain!.url;
+        var getEvolves = await getPokemonEvolutions(actionUrl: evolveUrl!);
         if (getEvolves == null) return null;
-        
+        try {
+          var setupResult = type == 'extend'
+              ? [...results, ...currentPokemon!.results!]
+              : results;
+          var evolutions = setupEvolutions(getEvolves, setupResult);
+          results[i].detail!.setEvolutions(evolutions);
+        } catch (e) {}
       }
 
       return pokemons;
@@ -159,10 +213,10 @@ class PokemonServices {
   }
 
   Future<GetPokemonEvolutionModel?> getPokemonEvolutions({
-    required int id,
+    required String actionUrl,
   }) async {
     try {
-      var url = baseUrl + 'evolution-chain/' + id.toString();
+      var url = actionUrl;
       var response = await http.get(Uri.parse(url));
 
       if (response.body.isEmpty) return null;

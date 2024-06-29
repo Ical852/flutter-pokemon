@@ -15,7 +15,7 @@ class ChainModel {
 
     this.evolvesTo = isNotNull(json['evolves_to'])
         ? json['evolves_to']
-            .map<ChainModel>((result) => ChainModel.fromJson(result))
+            .map<EvolveToModel>((result) => EvolveToModel.fromJson(result))
             .toList()
         : null;
   }
