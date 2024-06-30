@@ -42,12 +42,17 @@ class DetailPokemon extends StatelessWidget {
         left: type == 'left' ? 10 : null,
         top: 0,
         bottom: 0,
-        child: IconButton(
-          icon: Icon(
-            type == 'right' ? Icons.arrow_forward : Icons.arrow_back,
-            size: 30, color: Colors.white
-          ),
-          onPressed: onPress,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: Icon(
+                type == 'right' ? Icons.arrow_forward : Icons.arrow_back,
+                size: 30, color: Colors.white
+              ),
+              onPressed: onPress,
+            ),
+          ],
         ),
       );
     }

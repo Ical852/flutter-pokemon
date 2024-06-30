@@ -8,7 +8,7 @@ import 'package:flutterpokemon/screens/detail_pages/sections/detail_description.
 import 'package:flutterpokemon/screens/detail_pages/sections/detail_header.dart';
 import 'package:flutterpokemon/screens/detail_pages/sections/detail_pokemon.dart';
 import 'package:flutterpokemon/screens/detail_pages/tabs/about.dart';
-import 'package:flutterpokemon/screens/detail_pages/tabs/baseStats.dart';
+import 'package:flutterpokemon/screens/detail_pages/tabs/base_stats.dart';
 import 'package:flutterpokemon/screens/detail_pages/tabs/evolution.dart';
 import 'package:flutterpokemon/screens/detail_pages/tabs/moves.dart';
 import 'package:flutterpokemon/shared/constants.dart';
@@ -76,7 +76,11 @@ class _DetailPageState extends State<DetailPage> {
 
     Widget tabs() {
       return Container(
-        margin: EdgeInsets.only(top: 48),
+        margin: EdgeInsets.only(
+          top: 48, 
+          left: 24, 
+          right: 24
+        ),
         child: Container(
           decoration: BoxDecoration(
             border: Border(
@@ -104,35 +108,45 @@ class _DetailPageState extends State<DetailPage> {
     }
 
     Widget tabContent() {
-      switch (this.currentTab) {
-        case "About":
-          return AboutContent(
-            detail: detail,
-          );
-        case "Base Stats":
-          return BaseStatsContent(
-            detail: detail,
-          );
-        case "Evolution":
-          return EvolutionContent(
-            detail: detail,
-          );
-        case "Moves":
-          return MovesContent(
-            detail: detail,
-          );
-        default:
-          return AboutContent(
-            detail: detail,
-          );
+      bool noMarg = this.currentTab == "Evolution";
+      Widget getContent(detail) {
+        switch (this.currentTab) {
+          case "About":
+            return AboutContent(
+              detail: detail,
+            );
+          case "Base Stats":
+            return BaseStatsContent(
+              detail: detail,
+            );
+          case "Evolution":
+            return EvolutionContent(
+              detail: detail,
+            );
+          case "Moves":
+            return MovesContent(
+              detail: detail,
+            );
+          default:
+            return AboutContent(
+              detail: detail,
+            );
+        }
       }
+
+      return Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: !noMarg ? 24 : 0
+        ),
+        child: getContent(detail),
+      );      
     }
 
     Widget detailData() {
       return Align(
         alignment: Alignment.topCenter,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          padding: EdgeInsets.symmetric(vertical: 24),
           margin: EdgeInsets.only(top: 380),
           decoration: BoxDecoration(
             color: whiteColor,
