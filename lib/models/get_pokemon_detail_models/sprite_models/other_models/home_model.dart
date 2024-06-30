@@ -1,11 +1,7 @@
 import 'package:flutterpokemon/functions/global_func.dart';
 
 class HomeModel {
-  late String? 
-      frontDefault,
-      frontFemale,
-      frontShiny,
-      frontShinyFemale;
+  late String? frontDefault, frontFemale, frontShiny, frontShinyFemale;
 
   HomeModel.fromJson(Map<String, dynamic> json) {
     this.frontDefault = nullChecker(json['front_default']);

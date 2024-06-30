@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutterpokemon/functions/global_func.dart';
 import 'package:flutterpokemon/models/get_all_pokemon_models/pokemon_result_model.dart';

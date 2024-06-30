@@ -8,8 +8,7 @@ class GetPokemonEvolutionModel {
 
   GetPokemonEvolutionModel.fromJson(Map<String, dynamic> json) {
     this.id = nullChecker(json['id']);
-    this.chain =
-        isNotNull(json['chain']) ? ChainModel.fromJson(json['chain']) : null;
+    this.chain = isNotNull(json['chain']) ? ChainModel.fromJson(json['chain']) : null;
     this.babyTriggerItem = nullChecker(json['baby_trigger_item']);
   }
 

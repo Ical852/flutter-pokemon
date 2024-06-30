@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/pokemon_detail_model.dart';
 

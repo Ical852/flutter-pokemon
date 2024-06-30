@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutterpokemon/functions/global_func.dart';
 import 'package:flutterpokemon/shared/constants.dart';
@@ -27,10 +29,10 @@ class PokemonType extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-              color: whiteColor.withOpacity(0.1),
-              blurRadius: 1,
-              offset: Offset(0, 1)
-            )
+            color: whiteColor.withOpacity(0.1),
+            blurRadius: 1,
+            offset: Offset(0, 1)
+          )
         ]
       ),
       child: Text(

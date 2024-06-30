@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutterpokemon/functions/global_func.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/pokemon_detail_model.dart';
@@ -40,30 +42,31 @@ class AboutContent extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: datas.keys
-                  .map((key) => Container(
-                        margin: EdgeInsets.only(bottom: 12),
-                        child: Text(
-                          key,
-                          style: regular.mediumF
-                              .copyWith(color: greyColor.withOpacity(0.7)),
-                        ),
-                      ))
-                  .toList(),
+              children: datas.keys.map((key) {
+                return Container(
+                  margin: EdgeInsets.only(bottom: 12),
+                  child: Text(
+                    key,
+                    style: regular.mediumF.copyWith(
+                      color: greyColor.withOpacity(0.7)
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
           ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: datas.keys
-                  .map((key) => Container(
-                        margin: EdgeInsets.only(bottom: 12),
-                        child: Text(
-                          datas[key].toString(),
-                          style: regular.black.semiBold,
-                        ),
-                      ))
-                  .toList(),
+              children: datas.keys.map((key) {
+                return Container(
+                  margin: EdgeInsets.only(bottom: 12),
+                  child: Text(
+                    datas[key].toString(),
+                    style: regular.black.semiBold,
+                  ),
+                );
+              }).toList(),
             ),
           )
         ],

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutterpokemon/functions/global_func.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/pokemon_detail_model.dart';
@@ -23,7 +25,9 @@ class MovesContent extends StatelessWidget {
               children: [
                 Text(
                   "${index}. " + capitalize(move.move!.name!),
-                  style: medium.semiBold.copyWith(color: detail.bgColor),
+                  style: medium.semiBold.copyWith(
+                    color: detail.bgColor
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 18, top: 6),
@@ -44,13 +48,15 @@ class MovesContent extends StatelessWidget {
                         children: [
                           Text(
                             capitalize(det.moveLearnMethod!.name!),
-                            style:
-                                regular.mediumF.copyWith(color: detail.bgColor),
+                            style: regular.mediumF.copyWith(
+                              color: detail.bgColor
+                            ),
                           ),
                           Text(
                             " - " + capitalize(det.versionGroup!.name!),
                             style: regular.copyWith(
-                                color: blackColor.withOpacity(0.5)),
+                              color: blackColor.withOpacity(0.5)
+                            ),
                           ),
                         ],
                       ),

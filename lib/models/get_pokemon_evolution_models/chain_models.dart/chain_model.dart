@@ -10,14 +10,14 @@ class ChainModel {
   ChainModel.fromJson(Map<String, dynamic> json) {
     this.isBaby = nullChecker(json['is_baby']);
     this.species = isNotNull(json['species'])
-        ? SpeciesModel.fromJson(json['species'])
-        : null;
+      ? SpeciesModel.fromJson(json['species'])
+      : null;
 
     this.evolvesTo = isNotNull(json['evolves_to'])
-        ? json['evolves_to']
-            .map<EvolveToModel>((result) => EvolveToModel.fromJson(result))
-            .toList()
-        : null;
+      ? json['evolves_to']
+          .map<EvolveToModel>((result) => EvolveToModel.fromJson(result))
+          .toList()
+      : null;
   }
 
   Map<String, dynamic> toJson() {

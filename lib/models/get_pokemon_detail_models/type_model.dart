@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:flutterpokemon/functions/global_func.dart';
-import 'package:flutterpokemon/shared/constants.dart';
 
 class TypeModel {
   late int? slot;

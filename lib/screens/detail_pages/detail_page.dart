@@ -1,16 +1,18 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterpokemon/functions/global_func.dart';
 import 'package:flutterpokemon/models/get_all_pokemon_models/pokemon_result_model.dart';
+import 'package:flutterpokemon/screens/detail_pages/sections/detail_description.dart';
+import 'package:flutterpokemon/screens/detail_pages/sections/detail_header.dart';
+import 'package:flutterpokemon/screens/detail_pages/sections/detail_pokemon.dart';
 import 'package:flutterpokemon/screens/detail_pages/tabs/about.dart';
 import 'package:flutterpokemon/screens/detail_pages/tabs/baseStats.dart';
 import 'package:flutterpokemon/screens/detail_pages/tabs/evolution.dart';
 import 'package:flutterpokemon/screens/detail_pages/tabs/moves.dart';
 import 'package:flutterpokemon/shared/constants.dart';
-import 'package:flutterpokemon/shared/text_styles.dart';
-import 'package:flutterpokemon/widgets/detail/detail_image.dart';
 import 'package:flutterpokemon/widgets/detail/tabs_item.dart';
-import 'package:flutterpokemon/widgets/main/pokemon_type.dart';
 
 class DetailPage extends StatefulWidget {
   PokemonResultModel pokemon;
@@ -42,164 +44,33 @@ class _DetailPageState extends State<DetailPage> {
     final pokeList = this.type == "gifs" ? gifList : picList;
 
     Widget header() {
-      return Container(
-        margin: EdgeInsets.all(24),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                width: 24,
-                height: 24,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/ic_chevron_left.png"))),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                var newState = this.type == "gifs" ? "pics" : "gifs";
-                setState(() {
-                  this.type = newState;
-                });
-              },
-              child: Container(
-                width: 24,
-                height: 24,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/ic_change.png"))),
-              ),
-            ),
-          ],
-        ),
+      return DetailHeader(
+        onTap: (){
+          var newState = this.type == "gifs" ? "pics" : "gifs";
+          setState(() {
+            this.type = newState;
+          });
+        },
       );
     }
 
     Widget description() {
-      return Container(
-        margin: EdgeInsets.only(top: 72, left: 24, right: 24),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  capitalize(detail.name!),
-                  style: extra.white.semiBold.copyWith(fontSize: 32),
-                ),
-                SizedBox(height: 6),
-                Row(
-                  children: detail.types!
-                      .map((type) => PokemonType(
-                            big: true,
-                            type: type.type!.name!,
-                          ))
-                      .toList(),
-                )
-              ],
-            ),
-            Text(
-              '#${detail.id.toString()}',
-              style: extra.white.semiBold,
-            )
-          ],
-        ),
-      );
+      return DetailDescription(detail: detail);
     }
 
-    Widget indicator(int index) {
-      bool isCurrent = index == this.currentSlide;
-
-      return Container(
-        margin: EdgeInsets.symmetric(horizontal: 3),
-        width: isCurrent ? 24 : 8,
-        height: 8,
-        decoration: BoxDecoration(
-            color: isCurrent ? bgColor : greyColor.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(4)),
-      );
-    }
-
-    Widget arrowSlider(String type, Function() onPress) {
-      return Positioned(
-        right: type == 'right' ? 10 : null,
-        left: type == 'left' ? 10 : null,
-        top: 0,
-        bottom: 0,
-        child: IconButton(
-          icon: Icon(type == 'right' ? Icons.arrow_forward : Icons.arrow_back,
-              size: 30, color: Colors.white),
-          onPressed: onPress,
-        ),
-      );
-    }
-
-    int index = -1;
-    Widget carousel() {
-      return CarouselSlider(
-        carouselController: _controller,
-        items: pokeList.map((image) => DetailImage(image: image)).toList(),
-        options: CarouselOptions(
-          viewportFraction: 1.0,
-          initialPage: 0,
-          onPageChanged: (index, reason) {
-            setState(() {
-              this.currentSlide = index;
-            });
-          },
-        ),
-      );
-    }
-
-    Widget pokemonIndicator() {
-      return Container(
-        margin: EdgeInsets.only(top: 12),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: pokeList.map((tes) {
-            index++;
-            return indicator(index);
-          }).toList(),
-        ),
-      );
+    void onSlide(int index, CarouselPageChangedReason reason){
+      setState(() {
+        this.currentSlide = index;
+      });
     }
 
     Widget pokemonImage() {
-      return Align(
-        alignment: Alignment.topCenter,
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 180),
-              child: Stack(
-                children: [
-                  carousel(),
-                  arrowSlider('left', () {
-                    _controller.previousPage(
-                        duration: Duration(
-                          milliseconds: 800,
-                        ),
-                        curve: Curves.ease);
-                  }),
-                  arrowSlider('right', () {
-                    _controller.nextPage(
-                        duration: Duration(
-                          milliseconds: 800,
-                        ),
-                        curve: Curves.ease);
-                  }),
-                ],
-              ),
-            ),
-            pokemonIndicator()
-          ],
-        ),
+      return DetailPokemon(
+        controller: _controller,
+        pokeList: pokeList,
+        currentSlide: currentSlide,
+        bgColor: bgColor!,
+        onSlide: onSlide,
       );
     }
 
@@ -208,21 +79,25 @@ class _DetailPageState extends State<DetailPage> {
         margin: EdgeInsets.only(top: 48),
         child: Container(
           decoration: BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(color: greyColor.withOpacity(0.5)))),
+            border: Border(
+              bottom: BorderSide(
+                color: greyColor.withOpacity(0.5)
+              )
+            )
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: tabpages
-                .map((tab) => TabsItem(
-                      text: tab,
-                      currentTab: currentTab,
-                      onPress: () {
-                        setState(() {
-                          currentTab = tab;
-                        });
-                      },
-                    ))
-                .toList(),
+            children: tabpages.map((tab) {
+              return TabsItem(
+                text: tab,
+                currentTab: currentTab,
+                onPress: () {
+                  setState(() {
+                    currentTab = tab;
+                  });
+                },
+              );
+            }).toList(),
           ),
         ),
       );
@@ -260,9 +135,12 @@ class _DetailPageState extends State<DetailPage> {
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           margin: EdgeInsets.only(top: 380),
           decoration: BoxDecoration(
-              color: whiteColor,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24), topRight: Radius.circular(24))),
+            color: whiteColor,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(24),
+              topRight: Radius.circular(24)
+            )
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

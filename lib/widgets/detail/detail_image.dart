@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 class DetailImage extends StatelessWidget {
@@ -10,8 +12,12 @@ class DetailImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.contain, image: NetworkImage(this.image))));
+      decoration: BoxDecoration(
+        image: DecorationImage(
+        fit: BoxFit.contain,
+          image: NetworkImage(this.image)
+        )
+      )
+    );
   }
 }

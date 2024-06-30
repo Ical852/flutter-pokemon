@@ -6,8 +6,6 @@ class PokemonModel {
   late String? next, previous;
   late List<PokemonResultModel>? results;
 
- void asda (){}
-
   PokemonModel.fromJson(Map<String, dynamic> json) {
     this.count = nullChecker(json['count']);
     this.next = nullChecker(json['next']);

@@ -2,14 +2,15 @@ import 'package:flutterpokemon/functions/global_func.dart';
 import 'package:flutterpokemon/models/get_pokemon_detail_models/sprite_models/other_models/other_model.dart';
 
 class SpriteModel {
-  late String? backDefault,
-      backFemale,
-      backShiny,
-      backShinyFemale,
-      frontDefault,
-      frontFemale,
-      frontShiny,
-      frontShinyFemale;
+  late String? 
+    backDefault,
+    backFemale,
+    backShiny,
+    backShinyFemale,
+    frontDefault,
+    frontFemale,
+    frontShiny,
+    frontShinyFemale;
   late OtherModel? other;
 
   SpriteModel.fromJson(Map<String, dynamic> json) {

@@ -30,7 +30,9 @@ class PokemonServices {
   }
 
   List<PokemonDetailModel> setupEvolutions(
-      GetPokemonEvolutionModel evolutions, List<PokemonResultModel> results) {
+    GetPokemonEvolutionModel evolutions,
+    List<PokemonResultModel> results
+  ) {
     List<PokemonDetailModel> setupEvolves = [];
 
     var minFind = evolutions.chain?.species?.name!;
@@ -50,7 +52,7 @@ class PokemonServices {
     if (minFind != null) {
       try {
         PokemonResultModel? minFinded =
-            results.firstWhere((find) => find.name == minFind);
+          results.firstWhere((find) => find.name == minFind);
         if (minFinded.name != null) {
           setupEvolves.add(minFinded.detail!);
         }
@@ -60,7 +62,7 @@ class PokemonServices {
     if (midFind != null) {
       try {
         PokemonResultModel? midFinded =
-            results.firstWhere((find) => find.name == midFind);
+          results.firstWhere((find) => find.name == midFind);
         if (midFinded.name != null) {
           setupEvolves.add(midFinded.detail!);
         }
@@ -70,7 +72,7 @@ class PokemonServices {
     if (maxFind != null) {
       try {
         PokemonResultModel? maxFinded =
-            results.firstWhere((find) => find.name == maxFind);
+          results.firstWhere((find) => find.name == maxFind);
         if (maxFinded.name != null) {
           setupEvolves.add(maxFinded.detail!);
         }
@@ -132,8 +134,8 @@ class PokemonServices {
         if (getEvolves == null) return null;
         try {
           var setupResult = type == 'extend'
-              ? [...results, ...currentPokemon!.results!]
-              : results;
+            ? [...results, ...currentPokemon!.results!]
+            : results;
           var evolutions = setupEvolutions(getEvolves, setupResult);
           results[i].detail!.setEvolutions(evolutions);
         } catch (e) {}

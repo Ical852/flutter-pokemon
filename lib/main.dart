@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterpokemon/blocs/cubits/get_pokemon_cubit.dart';
-import 'package:flutterpokemon/screens/detail_pages/detail_page.dart';
 import 'package:flutterpokemon/screens/main_pages/home_page.dart';
 import 'package:flutterpokemon/screens/splash_page.dart';
 
