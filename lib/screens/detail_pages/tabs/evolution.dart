@@ -19,6 +19,11 @@ class EvolutionContent extends StatefulWidget {
 
 class _EvolutionContentState extends State<EvolutionContent> {
   String currentType = "pics";
+  Map<String, CarouselController> controllers = {
+    "1": CarouselController(),
+    "2": CarouselController(),
+    "3": CarouselController(),
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -170,13 +175,11 @@ class _EvolutionContentState extends State<EvolutionContent> {
       );
     }
 
-    Widget carousel(PokemonDetailModel evo) {
-      var _controller = CarouselController();
-
+    Widget carousel(PokemonDetailModel evo, int index) {
       return Stack(
         children: [
           CarouselSlider(
-            carouselController: _controller,
+            carouselController: controllers[index.toString()],
             items: getEvoSlide(evo).map((image) => pokeRenderer(image)).toList(),
             options: CarouselOptions(
               height: 150,
@@ -185,7 +188,7 @@ class _EvolutionContentState extends State<EvolutionContent> {
             ),
           ),
           arrowSlider('left', () {
-            _controller.previousPage(
+            controllers[index.toString()]!.previousPage(
               duration: Duration(
                 milliseconds: 800,
               ),
@@ -193,7 +196,7 @@ class _EvolutionContentState extends State<EvolutionContent> {
             );
           }),
           arrowSlider('right', () {
-            _controller.nextPage(
+            controllers[index.toString()]!.nextPage(
               duration: Duration(
                 milliseconds: 800,
               ),
@@ -230,7 +233,7 @@ class _EvolutionContentState extends State<EvolutionContent> {
         child: Column(
           children: [
             pokeEvoTop(evo, index),
-            carousel(evo),
+            carousel(evo, index),
             baseStats(evo)
           ],
         ),
