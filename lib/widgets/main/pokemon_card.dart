@@ -13,7 +13,7 @@ class PokemonCard extends StatelessWidget {
   PokemonCard({
     super.key,
     required this.pokemon,
-    });
+  });
     
 
   @override
@@ -55,6 +55,7 @@ class PokemonCard extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
+                      fit: BoxFit.contain,
                       image: NetworkImage(getImage())
                     )
                   ),

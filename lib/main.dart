@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterpokemon/blocs/cubits/get_pokemon_cubit.dart';
 import 'package:flutterpokemon/screens/main_pages/home_page.dart';
@@ -13,6 +14,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => GetPokemonCubit(),)
